@@ -1,0 +1,20 @@
+{
+  "status": "completed",
+  "preset": "standard",
+  "colors": {
+    "primary": "#3b82f6",
+    "secondary": null
+  },
+  "color_modes": ["light", "dark"],
+  "typography": {
+    "family": "Inter",
+    "mono": "JetBrains Mono",
+    "scale": "tailwind"
+  },
+  "spacing": "tailwind-compatible",
+  "radius": "moderate",
+  "output_formats": ["css", "tailwind", "typescript"],
+  "current_step": "completed",
+  "started_at": "2026-02-23T00:00:00Z",
+  "completed_at": "2026-02-23T00:00:00Z"
+}

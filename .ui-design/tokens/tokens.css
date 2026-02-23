@@ -1,10 +1,9 @@
-@import "tailwindcss";
-
-/* Import Inter and JetBrains Mono from Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+/* Design System Tokens - Generated */
+/* Legal AI Research Assistant Design System v1.0.0 */
+/* Do not edit directly. Regenerate with design-system-setup */
 
 /* ============================================ */
-/* DESIGN SYSTEM TOKENS                         */
+/* LIGHT MODE (DEFAULT)                         */
 /* ============================================ */
 
 :root {
@@ -34,25 +33,28 @@
   --color-neutral-900: #1c1917;
   --color-neutral-950: #0c0a09;
 
-  /* Semantic Colors */
+  /* Colors - Semantic (Success) */
   --color-success-50: #f0fdf4;
   --color-success-100: #dcfce7;
   --color-success-500: #22c55e;
   --color-success-600: #16a34a;
   --color-success-700: #15803d;
 
+  /* Colors - Semantic (Warning) */
   --color-warning-50: #fffbeb;
   --color-warning-100: #fef3c7;
   --color-warning-500: #f59e0b;
   --color-warning-600: #d97706;
   --color-warning-700: #b45309;
 
+  /* Colors - Semantic (Error) */
   --color-error-50: #fef2f2;
   --color-error-100: #fee2e2;
   --color-error-500: #ef4444;
   --color-error-600: #dc2626;
   --color-error-700: #b91c1c;
 
+  /* Colors - Semantic (Info) */
   --color-info-50: #eff6ff;
   --color-info-100: #dbeafe;
   --color-info-500: #3b82f6;
@@ -80,6 +82,46 @@
   --input: #e7e5e4;
   --ring: #3b82f6;
 
+  /* Typography */
+  --font-family-sans: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, 'Fira Code', 'Consolas', monospace;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 1.75;
+
+  /* Spacing (Tailwind-compatible) */
+  --spacing-0: 0;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+  --spacing-12: 3rem;
+  --spacing-16: 4rem;
+  --spacing-20: 5rem;
+  --spacing-24: 6rem;
+
   /* Border Radius */
   --radius-sm: 0.125rem;
   --radius-base: 0.25rem;
@@ -90,11 +132,20 @@
   --radius-3xl: 1.5rem;
   --radius-full: 9999px;
 
-  /* Animation */
+  /* Shadows (Subtle, Professional) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Animation (Minimal, Fast) */
   --duration-fast: 150ms;
   --duration-normal: 200ms;
   --duration-slow: 300ms;
   --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
 }
 
 /* ============================================ */
@@ -171,61 +222,26 @@
 }
 
 /* ============================================ */
-/* BASE STYLES                                  */
+/* UTILITY CLASSES                              */
 /* ============================================ */
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* ============================================ */
-/* ACCESSIBILITY                                */
-/* ============================================ */
-
-/* Focus Visible (Keyboard Navigation) */
+/* Focus Visible (Accessibility) */
 *:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
 
-/* Respect Reduced Motion Preference */
+/* Smooth Transitions */
+* {
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--ease-default);
+}
+
+/* Disable Transitions on Preference */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-/* ============================================ */
-/* UTILITY CLASSES                              */
-/* ============================================ */
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Transition Utilities */
-  .transition-fast {
-    transition-duration: var(--duration-fast);
-    transition-timing-function: var(--ease-default);
-  }
-
-  .transition-normal {
-    transition-duration: var(--duration-normal);
-    transition-timing-function: var(--ease-default);
-  }
-
-  .transition-slow {
-    transition-duration: var(--duration-slow);
-    transition-timing-function: var(--ease-default);
   }
 }

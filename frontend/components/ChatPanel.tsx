@@ -2,7 +2,11 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Message } from '@/types';
+import { Send, Scale, AlertCircle } from 'lucide-react';
 import MessageBubble from './MessageBubble';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface ChatPanelProps {
   messages: Message[];
@@ -36,20 +40,38 @@ export default function ChatPanel({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    // Allow Shift+Enter for new lines (future: textarea support)
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-background">
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-6 space-y-4">
         {messages.length === 0 ? (
-          <div className="flex items-center justify-center h-full text-gray-500">
-            <div className="text-center">
-              <h3 className="text-lg font-semibold mb-2">Legal AI Research Assistant</h3>
-              <p className="text-sm">
-                Ask questions about U.S. case law and get citation-grounded answers.
+          <div className="flex items-center justify-center h-full text-muted-foreground">
+            <div className="text-center max-w-md">
+              <div className="mb-4 flex justify-center">
+                <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Scale className="h-8 w-8 text-primary" />
+                </div>
+              </div>
+              <h3 className="text-xl font-semibold mb-3 text-foreground">
+                Legal AI Research Assistant
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                Ask questions about U.S. case law and receive citation-grounded answers with confidence scoring.
               </p>
-              <p className="text-xs mt-4 text-gray-400">
-                Try: "What is contract consideration?" or "Explain the Fourth Amendment exclusionary rule"
-              </p>
+              <div className="bg-muted/50 rounded-lg p-4 text-left space-y-2">
+                <p className="text-xs font-medium text-muted-foreground mb-2">Example questions:</p>
+                <p className="text-sm text-foreground/80">• "What is contract consideration?"</p>
+                <p className="text-sm text-foreground/80">• "Explain the Fourth Amendment exclusionary rule"</p>
+                <p className="text-sm text-foreground/80">• "What is qualified immunity for police officers?"</p>
+              </div>
             </div>
           </div>
         ) : (
@@ -63,12 +85,10 @@ export default function ChatPanel({
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-gray-100 rounded-lg px-4 py-3 border border-gray-200">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
-                  </div>
+                <div className="max-w-[85%] space-y-3">
+                  <Skeleton className="h-4 w-[300px]" />
+                  <Skeleton className="h-4 w-[250px]" />
+                  <Skeleton className="h-4 w-[280px]" />
                 </div>
               </div>
             )}
@@ -78,27 +98,42 @@ export default function ChatPanel({
       </div>
 
       {/* Input Area */}
-      <div className="border-t border-gray-200 p-4">
-        <form onSubmit={handleSubmit} className="flex gap-2">
-          <input
+      <div className="border-t border-border bg-background p-4">
+        <form onSubmit={handleSubmit} className="flex gap-3">
+          <Input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
             placeholder="Ask a legal research question..."
             disabled={isLoading}
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="flex-1 h-11"
+            aria-label="Legal research question input"
           />
-          <button
+          <Button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            size="lg"
+            className="px-6"
           >
-            {isLoading ? 'Sending...' : 'Send'}
-          </button>
+            {isLoading ? (
+              <>
+                <span className="animate-pulse">Sending</span>
+              </>
+            ) : (
+              <>
+                Send
+                <Send className="ml-2 h-4 w-4" />
+              </>
+            )}
+          </Button>
         </form>
-        <p className="text-xs text-gray-500 mt-2">
-          This is not legal advice. Consult a licensed attorney for specific guidance.
-        </p>
+        <div className="mt-2.5 flex items-start gap-2 text-xs text-muted-foreground">
+          <AlertCircle className="h-3.5 w-3.5 mt-0.5 shrink-0" />
+          <p className="leading-relaxed">
+            This is not legal advice. Consult a licensed attorney for specific legal guidance.
+          </p>
+        </div>
       </div>
     </div>
   );

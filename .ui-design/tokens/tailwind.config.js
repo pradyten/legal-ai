@@ -1,11 +1,9 @@
-import type { Config } from "tailwindcss";
+// Design System Tailwind Extension
+// Legal AI Research Assistant Design System v1.0.0
+// Import and spread in your tailwind.config.ts
 
-const config: Config = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   theme: {
     extend: {
       colors: {
@@ -127,6 +125,19 @@ const config: Config = {
         "4xl": ["2.25rem", { lineHeight: "2.5rem" }],
         "5xl": ["3rem", { lineHeight: "1" }],
       },
+      fontWeight: {
+        normal: "400",
+        medium: "500",
+        semibold: "600",
+        bold: "700",
+      },
+      lineHeight: {
+        tight: "1.25",
+        snug: "1.375",
+        normal: "1.5",
+        relaxed: "1.625",
+        loose: "1.75",
+      },
       spacing: {
         18: "4.5rem",
         88: "22rem",
@@ -153,6 +164,9 @@ const config: Config = {
         normal: "200ms",
         slow: "300ms",
       },
+      transitionTimingFunction: {
+        DEFAULT: "cubic-bezier(0.4, 0, 0.2, 1)",
+      },
       keyframes: {
         "fade-in": {
           "0%": { opacity: "0" },
@@ -174,6 +188,4 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
 };
-export default config;

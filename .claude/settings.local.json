@@ -7,7 +7,9 @@
       "Bash(source:*)",
       "Bash(timeout 5 python:*)",
       "Bash(timeout 3 python:*)",
-      "Bash(npx create-next-app:*)"
+      "Bash(npx create-next-app:*)",
+      "Bash(npx shadcn@latest add separator --yes)",
+      "Bash(npx shadcn@latest add:*)"
     ]
   },
   "enabledPlugins": {

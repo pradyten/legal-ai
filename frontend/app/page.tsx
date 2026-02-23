@@ -2,18 +2,22 @@
 
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Message, ChatRequest, RetrievedChunk } from '@/types';
+import { Scale, Sparkles, FileText } from 'lucide-react';
+import { Message, ChatRequest } from '@/types';
 import { sendMessage } from '@/lib/api';
 import ChatPanel from '@/components/ChatPanel';
 import SourceViewer from '@/components/SourceViewer';
 import CitationCard from '@/components/CitationCard';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
+import { toast } from 'sonner';
 
 export default function Home() {
   const [sessionId, setSessionId] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   // Initialize session ID on mount
   useEffect(() => {
@@ -33,7 +37,6 @@ export default function Home() {
 
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
-    setError(null);
 
     try {
       // Prepare conversation history
@@ -66,7 +69,9 @@ export default function Home() {
       setSelectedMessage(assistantMessage); // Auto-select to show sources
 
       if (response.error) {
-        setError(response.error);
+        toast.error('API Error', {
+          description: response.error,
+        });
       }
     } catch (err) {
       const errorMessage: Message = {
@@ -76,35 +81,42 @@ export default function Home() {
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, errorMessage]);
-      setError(err instanceof Error ? err.message : 'Unknown error occurred');
+
+      toast.error('Connection Error', {
+        description: err instanceof Error ? err.message : 'Unknown error occurred. Please check your connection.',
+      });
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col bg-background">
       {/* Header */}
-      <header className="bg-gray-900 text-white py-4 px-6 shadow-lg">
-        <h1 className="text-2xl font-bold">Legal AI Research Assistant</h1>
-        <p className="text-sm text-gray-300 mt-1">
-          Citation-grounded answers from U.S. case law
-        </p>
-      </header>
-
-      {/* Error Banner */}
-      {error && (
-        <div className="bg-red-50 border-b border-red-200 px-6 py-3">
-          <p className="text-sm text-red-800">
-            <strong>Error:</strong> {error}
-          </p>
+      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="flex h-16 items-center px-6 justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-sm">
+              <Scale className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
+                Legal AI Research Assistant
+                <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+              </h1>
+              <p className="text-xs text-muted-foreground">
+                Citation-grounded answers from U.S. case law
+              </p>
+            </div>
+          </div>
+          <ThemeToggle />
         </div>
-      )}
+      </header>
 
       {/* Main Content */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Chat Panel - 60% */}
-        <div className="w-3/5 border-r border-gray-200 flex flex-col">
+        {/* Chat Panel - 60% on desktop, full width on mobile */}
+        <div className="w-full md:w-3/5 border-r border-border flex flex-col">
           <ChatPanel
             messages={messages}
             isLoading={isLoading}
@@ -113,34 +125,45 @@ export default function Home() {
           />
         </div>
 
-        {/* Source Viewer - 40% */}
-        <div className="w-2/5 bg-gray-50 p-6 overflow-hidden flex flex-col">
+        {/* Source Viewer - 40% on desktop, hidden on mobile */}
+        <div className="hidden md:flex md:w-2/5 bg-muted/30 flex-col overflow-hidden">
           {selectedMessage && selectedMessage.citations && selectedMessage.citations.length > 0 ? (
-            <div className="h-full overflow-y-auto">
-              <h3 className="text-lg font-semibold mb-4 sticky top-0 bg-gray-50 pb-2 border-b">
-                Citations ({selectedMessage.citations.length})
-              </h3>
-              <div className="space-y-4">
-                {selectedMessage.citations.map((citation, idx) => (
-                  <CitationCard key={idx} citation={citation} index={idx} />
-                ))}
+            <div className="h-full flex flex-col overflow-hidden">
+              {/* Citations Section */}
+              <div className="sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 border-b border-border px-6 py-4">
+                <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                  <FileText className="h-5 w-5 text-primary" />
+                  Citations
+                  <span className="ml-auto text-sm font-normal text-muted-foreground">
+                    {selectedMessage.citations.length}
+                  </span>
+                </h3>
               </div>
 
-              {selectedMessage.retrieved_chunks && selectedMessage.retrieved_chunks.length > 0 && (
-                <>
-                  <h3 className="text-lg font-semibold mb-4 mt-8 sticky top-0 bg-gray-50 pb-2 border-b">
-                    Retrieved Sources ({selectedMessage.retrieved_chunks.length})
-                  </h3>
-                  <SourceViewer chunks={selectedMessage.retrieved_chunks} />
-                </>
-              )}
+              <ScrollArea className="flex-1">
+                <div className="space-y-4 p-6">
+                  {selectedMessage.citations.map((citation, idx) => (
+                    <CitationCard key={idx} citation={citation} index={idx} />
+                  ))}
+                </div>
+
+                {selectedMessage.retrieved_chunks && selectedMessage.retrieved_chunks.length > 0 && (
+                  <>
+                    <Separator className="my-4" />
+                    <div className="px-6 pb-6">
+                      <h3 className="text-base font-semibold mb-4 text-foreground">
+                        Retrieved Sources ({selectedMessage.retrieved_chunks.length})
+                      </h3>
+                      <SourceViewer chunks={selectedMessage.retrieved_chunks} />
+                    </div>
+                  </>
+                )}
+              </ScrollArea>
             </div>
           ) : selectedMessage && selectedMessage.retrieved_chunks ? (
             <SourceViewer chunks={selectedMessage.retrieved_chunks} />
           ) : (
-            <div className="h-full flex items-center justify-center text-gray-500 text-sm">
-              <p>Ask a question to see sources and citations</p>
-            </div>
+            <SourceViewer chunks={[]} />
           )}
         </div>
       </div>
