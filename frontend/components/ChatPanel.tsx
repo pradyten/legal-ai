@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Message } from '@/types';
 import { Send, Scale, AlertCircle } from 'lucide-react';
 import MessageBubble from './MessageBubble';
+import ScrollToBottomButton from './ScrollToBottomButton';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -26,6 +27,7 @@ export default function ChatPanel({
 }: ChatPanelProps) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const internalInputRef = useRef<HTMLInputElement>(null);
   const finalInputRef = inputRef || internalInputRef;
 
@@ -57,7 +59,8 @@ export default function ChatPanel({
     <div className="flex flex-col h-full bg-background">
       {/* Messages Area */}
       <div
-        className="flex-1 overflow-y-auto p-6 space-y-4"
+        ref={messagesContainerRef}
+        className="flex-1 overflow-y-auto p-6 space-y-4 relative"
         role="log"
         aria-live="polite"
         aria-atomic="false"
@@ -105,6 +108,14 @@ export default function ChatPanel({
             )}
             <div ref={messagesEndRef} />
           </>
+        )}
+
+        {/* Scroll to Bottom Button */}
+        {messages.length > 0 && (
+          <ScrollToBottomButton
+            containerRef={messagesContainerRef}
+            messagesCount={messages.length}
+          />
         )}
       </div>
 

@@ -11,6 +11,9 @@ import SourceViewer from '@/components/SourceViewer';
 import CitationCard from '@/components/CitationCard';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { KeyboardShortcutsDialog } from '@/components/KeyboardShortcutsDialog';
+import { ExportChatDialog } from '@/components/ExportChatDialog';
+import { ClearChatDialog } from '@/components/ClearChatDialog';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
@@ -38,6 +41,12 @@ export default function Home() {
   useEffect(() => {
     setSessionId(uuidv4());
   }, []);
+
+  const handleClearChat = () => {
+    setMessages([]);
+    setSelectedMessage(null);
+    setSessionId(uuidv4()); // Generate new session ID
+  };
 
   const handleSendMessage = async (content: string) => {
     if (!sessionId) return;
@@ -106,27 +115,33 @@ export default function Home() {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-background">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="flex h-16 items-center px-6 justify-between">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-sm">
-              <Scale className="h-5 w-5 text-white" />
+    <ErrorBoundary>
+      <div className="h-screen flex flex-col bg-background">
+        {/* Header */}
+        <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="flex h-16 items-center px-6 justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-sm">
+                <Scale className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
+                  Legal AI Research Assistant
+                  <Sparkles className="h-4 w-4 text-primary animate-pulse" />
+                </h1>
+                <p className="text-xs text-muted-foreground">
+                  Citation-grounded answers from U.S. case law
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
-                Legal AI Research Assistant
-                <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-              </h1>
-              <p className="text-xs text-muted-foreground">
-                Citation-grounded answers from U.S. case law
-              </p>
+            <div className="flex items-center gap-2">
+              <ExportChatDialog messages={messages} />
+              <ClearChatDialog onClearChat={handleClearChat} messageCount={messages.length} />
+              <div className="h-6 w-px bg-border mx-2" />
+              <ThemeToggle />
             </div>
           </div>
-          <ThemeToggle />
-        </div>
-      </header>
+        </header>
 
       {/* Main Content */}
       <div className="flex-1 flex overflow-hidden">
@@ -184,8 +199,9 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Keyboard Shortcuts Dialog */}
-      <KeyboardShortcutsDialog open={showShortcuts} onOpenChange={setShowShortcuts} />
-    </div>
+        {/* Keyboard Shortcuts Dialog */}
+        <KeyboardShortcutsDialog open={showShortcuts} onOpenChange={setShowShortcuts} />
+      </div>
+    </ErrorBoundary>
   );
 }
