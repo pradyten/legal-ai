@@ -50,8 +50,10 @@ export default function MessageBubble({ message, onSelectMessage }: MessageBubbl
             size="icon"
             onClick={handleCopy}
             className={cn(
-              'absolute -top-2 -right-2 h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity shadow-md',
-              isUser ? 'bg-primary-600 hover:bg-primary-700 text-white' : 'bg-background'
+              'absolute top-2 right-2 h-7 w-7 opacity-0 group-hover:opacity-100 transition-opacity',
+              isUser
+                ? 'bg-primary-600/20 hover:bg-primary-700/30 text-white border border-white/20'
+                : 'bg-background/80 hover:bg-background border border-border'
             )}
           >
             {copied ? (
