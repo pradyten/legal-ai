@@ -7,6 +7,7 @@ import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card'
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import { COPY_SUCCESS_DURATION, EXCERPT_PREVIEW_LENGTH } from '@/lib/constants';
 
 interface CitationCardProps {
   citation: Citation;
@@ -17,10 +18,10 @@ export default function CitationCard({ citation, index }: CitationCardProps) {
   const [copied, setCopied] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
-  const isLongExcerpt = citation.excerpt.length > 200;
+  const isLongExcerpt = citation.excerpt.length > EXCERPT_PREVIEW_LENGTH;
   const displayExcerpt = expanded || !isLongExcerpt
     ? citation.excerpt
-    : citation.excerpt.substring(0, 200) + '...';
+    : citation.excerpt.substring(0, EXCERPT_PREVIEW_LENGTH) + '...';
 
   const handleCopy = async () => {
     const citationText = `${citation.case_name}, ${citation.citation} (${citation.court}, ${citation.date})`;
@@ -29,7 +30,7 @@ export default function CitationCard({ citation, index }: CitationCardProps) {
       await navigator.clipboard.writeText(citationText);
       setCopied(true);
       toast.success('Citation copied to clipboard');
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), COPY_SUCCESS_DURATION);
     } catch (err) {
       toast.error('Failed to copy citation');
     }

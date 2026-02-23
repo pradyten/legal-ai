@@ -7,12 +7,14 @@ import MessageBubble from './MessageBubble';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { MAX_MESSAGE_LENGTH } from '@/lib/constants';
 
 interface ChatPanelProps {
   messages: Message[];
   isLoading: boolean;
   onSendMessage: (message: string) => void;
   onSelectMessage?: (message: Message) => void;
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 export default function ChatPanel({
@@ -20,9 +22,12 @@ export default function ChatPanel({
   isLoading,
   onSendMessage,
   onSelectMessage,
+  inputRef,
 }: ChatPanelProps) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const internalInputRef = useRef<HTMLInputElement>(null);
+  const finalInputRef = inputRef || internalInputRef;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -51,7 +56,13 @@ export default function ChatPanel({
   return (
     <div className="flex flex-col h-full bg-background">
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-6 space-y-4">
+      <div
+        className="flex-1 overflow-y-auto p-6 space-y-4"
+        role="log"
+        aria-live="polite"
+        aria-atomic="false"
+        aria-label="Conversation messages"
+      >
         {messages.length === 0 ? (
           <div className="flex items-center justify-center h-full text-muted-foreground">
             <div className="text-center max-w-md">
@@ -100,16 +111,27 @@ export default function ChatPanel({
       {/* Input Area */}
       <div className="border-t border-border bg-background p-4">
         <form onSubmit={handleSubmit} className="flex gap-3">
-          <Input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Ask a legal research question..."
-            disabled={isLoading}
-            className="flex-1 h-11"
-            aria-label="Legal research question input"
-          />
+          <div className="relative flex-1">
+            <Input
+              ref={finalInputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Ask a legal research question..."
+              disabled={isLoading}
+              maxLength={MAX_MESSAGE_LENGTH}
+              className="flex-1 h-11 pr-16"
+              aria-label="Legal research question input"
+              aria-describedby="char-count"
+            />
+            <span
+              id="char-count"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground"
+            >
+              {input.length}/{MAX_MESSAGE_LENGTH}
+            </span>
+          </div>
           <Button
             type="submit"
             disabled={isLoading || !input.trim()}

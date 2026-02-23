@@ -7,6 +7,7 @@ import ConfidenceBadge from './ConfidenceBadge';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import { COPY_SUCCESS_DURATION } from '@/lib/constants';
 
 interface MessageBubbleProps {
   message: Message;
@@ -24,7 +25,7 @@ export default function MessageBubble({ message, onSelectMessage }: MessageBubbl
       await navigator.clipboard.writeText(message.content);
       setCopied(true);
       toast.success('Message copied to clipboard');
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), COPY_SUCCESS_DURATION);
     } catch (err) {
       toast.error('Failed to copy message');
     }
@@ -73,8 +74,8 @@ export default function MessageBubble({ message, onSelectMessage }: MessageBubbl
           {message.content}
         </div>
 
-        {/* Assistant Message Metadata */}
-        {!isUser && (
+        {/* Message Metadata */}
+        {!isUser ? (
           <>
             {message.confidence && (
               <div className="mt-4 flex flex-wrap items-center gap-2">
@@ -93,6 +94,10 @@ export default function MessageBubble({ message, onSelectMessage }: MessageBubbl
               {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </div>
           </>
+        ) : (
+          <div className="mt-2 text-xs text-white/70">
+            {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </div>
         )}
       </div>
     </div>

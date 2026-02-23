@@ -1,23 +1,38 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Scale, Sparkles, FileText } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import { Message, ChatRequest } from '@/types';
 import { sendMessage } from '@/lib/api';
 import ChatPanel from '@/components/ChatPanel';
 import SourceViewer from '@/components/SourceViewer';
 import CitationCard from '@/components/CitationCard';
 import { ThemeToggle } from '@/components/theme-toggle';
+import { KeyboardShortcutsDialog } from '@/components/KeyboardShortcutsDialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
+import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 
 export default function Home() {
   const [sessionId, setSessionId] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
+  const [showShortcuts, setShowShortcuts] = useState(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { setTheme, theme } = useTheme();
+
+  // Keyboard shortcuts
+  useKeyboardShortcuts({
+    onFocusInput: () => inputRef.current?.focus(),
+    onToggleTheme: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
+    onShowHelp: () => setShowShortcuts(true),
+    onEscape: () => setShowShortcuts(false),
+  });
 
   // Initialize session ID on mount
   useEffect(() => {
@@ -115,18 +130,19 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Chat Panel - 60% on desktop, full width on mobile */}
-        <div className="w-full md:w-3/5 border-r border-border flex flex-col">
+        {/* Chat Panel - 60% */}
+        <div className="w-3/5 border-r border-border flex flex-col">
           <ChatPanel
             messages={messages}
             isLoading={isLoading}
             onSendMessage={handleSendMessage}
             onSelectMessage={setSelectedMessage}
+            inputRef={inputRef}
           />
         </div>
 
-        {/* Source Viewer - 40% on desktop, hidden on mobile */}
-        <div className="hidden md:flex md:w-2/5 bg-muted/30 flex-col overflow-hidden">
+        {/* Source Viewer - 40% */}
+        <div className="w-2/5 bg-muted/30 flex flex-col overflow-hidden">
           {selectedMessage && selectedMessage.citations && selectedMessage.citations.length > 0 ? (
             <div className="h-full flex flex-col overflow-hidden">
               {/* Citations Section */}
@@ -167,6 +183,9 @@ export default function Home() {
           )}
         </div>
       </div>
+
+      {/* Keyboard Shortcuts Dialog */}
+      <KeyboardShortcutsDialog open={showShortcuts} onOpenChange={setShowShortcuts} />
     </div>
   );
 }
