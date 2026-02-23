@@ -10,7 +10,8 @@
       "Bash(npx create-next-app:*)",
       "Bash(npx shadcn@latest add separator --yes)",
       "Bash(npx shadcn@latest add:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(/c/Users/Pradyumn K:*)"
     ]
   },
   "enabledPlugins": {
