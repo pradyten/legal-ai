@@ -1,0 +1,250 @@
+[
+  {
+    "case_name": "Smith v. Jones Manufacturing Co.",
+    "court": "Supreme Court of California",
+    "date": "2023-05-15",
+    "citation": "123 Cal.4th 456",
+    "topic": "contract law",
+    "content": "In this breach of contract case, plaintiff Smith entered into a written agreement with Jones Manufacturing Co. for the delivery of specialized machinery. The contract explicitly stated delivery would occur within 90 days. Jones failed to deliver within the agreed timeframe, causing Smith to lose a major contract with a third-party customer. The court held that time was of the essence in this commercial contract, and the delay constituted a material breach. Under California contract law, when a party fails to perform a material term of the contract, the non-breaching party is entitled to damages. The court awarded Smith consequential damages for the lost contract, reasoning that such damages were foreseeable at the time the contract was formed, as Jones knew Smith intended to use the machinery for a specific commercial opportunity."
+  },
+  {
+    "case_name": "United States v. Rodriguez",
+    "court": "United States Court of Appeals, Ninth Circuit",
+    "date": "2022-11-08",
+    "citation": "987 F.3d 234",
+    "topic": "constitutional law",
+    "content": "This Fourth Amendment case concerns the warrantless search of a vehicle. Officers stopped Rodriguez for a broken taillight and detected the odor of marijuana. Without obtaining a warrant, they searched the vehicle and found illegal firearms. The court held that under the automobile exception to the Fourth Amendment's warrant requirement, officers may search a vehicle without a warrant if they have probable cause to believe it contains contraband. The smell of marijuana, combined with the officers' training and experience, established probable cause. The court rejected Rodriguez's argument that officers should have obtained a warrant, noting that the automobile exception exists because vehicles are inherently mobile and evidence could be lost if officers had to wait for a warrant. The search was constitutional, and the evidence was admissible."
+  },
+  {
+    "case_name": "Martinez v. City of Los Angeles",
+    "court": "California Court of Appeal, Second District",
+    "date": "2023-03-22",
+    "citation": "456 Cal.App.5th 789",
+    "topic": "tort law",
+    "content": "Plaintiff Martinez slipped and fell on a cracked sidewalk owned and maintained by the City of Los Angeles. She suffered serious injuries including a broken hip. The central issue was whether the City had actual or constructive notice of the dangerous condition. The court applied the principle that a public entity is liable for injuries caused by a dangerous condition of public property only if the entity had notice of the condition. Evidence showed that multiple residents had filed complaints about the cracked sidewalk six months before the accident, establishing actual notice. The court held the City liable, emphasizing that municipalities cannot ignore known hazards on public property. The City's failure to repair the sidewalk within a reasonable time after receiving notice constituted negligence, and Martinez was entitled to damages for her medical expenses, lost wages, and pain and suffering."
+  },
+  {
+    "case_name": "Tech Innovations LLC v. Digital Solutions Inc.",
+    "court": "United States District Court, Northern District of California",
+    "date": "2023-07-19",
+    "citation": "234 F.Supp.3d 567",
+    "topic": "intellectual property",
+    "content": "This patent infringement case involved a dispute over software algorithms used in data compression technology. Tech Innovations held a patent for a novel compression method and alleged that Digital Solutions' product infringed upon their intellectual property rights. The court applied the two-step Alice framework to determine patent eligibility. First, the court determined whether the patent claims were directed to a patent-ineligible concept such as an abstract idea. Second, the court examined whether the claims contained an inventive concept sufficient to transform the abstract idea into a patent-eligible application. The court found that while the underlying mathematical algorithm was abstract, the specific implementation in the patent claims involved a non-conventional and non-generic arrangement of known elements that improved computer functionality. The patent was valid, and Digital Solutions had infringed by implementing substantially similar compression techniques in their commercial software product."
+  },
+  {
+    "case_name": "Johnson v. State Board of Education",
+    "court": "Supreme Court of New York",
+    "date": "2022-09-14",
+    "citation": "678 N.Y.2d 890",
+    "topic": "administrative law",
+    "content": "Teacher Johnson challenged his termination by the State Board of Education, claiming the Board failed to follow proper administrative procedures. Under New York education law, teachers with tenure are entitled to notice and a hearing before termination. The court examined whether the Board complied with procedural due process requirements. Evidence showed that Johnson received written notice of the charges against him only three days before the hearing, rather than the required 30 days. Additionally, the Board denied his request to present witness testimony. The court held that these procedural violations deprived Johnson of his due process rights. Administrative agencies must strictly comply with statutory procedures, especially when individual liberty or property interests are at stake. The court reversed Johnson's termination and ordered his reinstatement with back pay."
+  },
+  {
+    "case_name": "Green Energy Corp. v. Environmental Protection Agency",
+    "court": "United States Court of Appeals, D.C. Circuit",
+    "date": "2023-01-30",
+    "citation": "345 F.3d 678",
+    "topic": "environmental law",
+    "content": "Green Energy Corp. challenged an EPA regulation limiting emissions from industrial facilities. The company argued the regulation exceeded the EPA's statutory authority under the Clean Air Act. The court applied the Chevron deference framework, which requires courts to defer to agency interpretations of ambiguous statutes within their expertise. First, the court examined whether Congress directly spoke to the precise question at issue. Finding the Clean Air Act ambiguous regarding the specific emission limits, the court proceeded to step two: whether the EPA's interpretation was reasonable. The court upheld the regulation, finding that the EPA's interpretation was based on scientific evidence and fell within the zone of reasonableness. Agencies possess specialized expertise in technical matters, and courts should not substitute their judgment for that of the agency when the statutory language is ambiguous and the agency's interpretation is rational."
+  },
+  {
+    "case_name": "Davis v. Metropolitan Police Department",
+    "court": "United States District Court, District of Columbia",
+    "date": "2022-12-05",
+    "citation": "567 F.Supp.3d 234",
+    "topic": "employment law",
+    "content": "Former police officer Davis sued the Metropolitan Police Department for wrongful termination, alleging discrimination based on race in violation of Title VII of the Civil Rights Act. Davis, an African American officer, claimed he was terminated for minor infractions while white officers who committed similar or more serious violations received only warnings. The court applied the McDonnell Douglas burden-shifting framework for discrimination cases. Davis established a prima facie case by showing: (1) he belonged to a protected class, (2) he was performing his job satisfactorily, (3) he suffered an adverse employment action, and (4) similarly situated employees outside his protected class received more favorable treatment. The burden then shifted to the employer to articulate a legitimate, non-discriminatory reason for the termination. The Police Department claimed Davis violated standard operating procedures. However, Davis presented evidence that the stated reason was pretextual, showing a pattern of disparate treatment. The court found sufficient evidence of discrimination to survive summary judgment."
+  },
+  {
+    "case_name": "Anderson v. Wilson",
+    "court": "Supreme Court of Texas",
+    "date": "2023-04-11",
+    "citation": "890 S.W.3d 123",
+    "topic": "property law",
+    "content": "This case involved a boundary dispute between neighboring landowners Anderson and Wilson. Anderson claimed ownership of a strip of land based on adverse possession. Under Texas law, a claimant must prove: (1) actual possession, (2) that is hostile and adverse, (3) open and notorious, (4) exclusive, and (5) continuous for the statutory period of ten years. Anderson presented evidence that he maintained a fence on the disputed land, mowed the grass regularly, and planted trees for over fifteen years. Wilson knew about Anderson's use but did not object. The court held that Anderson satisfied all elements of adverse possession. The possession was actual and visible, adverse to Wilson's interests, open and obvious to anyone inspecting the property, exclusive to Anderson's use, and continuous for more than the required ten years. Accordingly, Anderson acquired legal title to the disputed strip through adverse possession, despite Wilson holding the original deed."
+  },
+  {
+    "case_name": "People v. Thompson",
+    "court": "Court of Appeal of California, First Appellate District",
+    "date": "2022-10-17",
+    "citation": "234 Cal.App.5th 456",
+    "topic": "criminal law",
+    "content": "Defendant Thompson was convicted of burglary and appealed, arguing insufficient evidence supported the conviction. Under California law, burglary requires proof that the defendant entered a structure with the intent to commit theft or any felony. Thompson entered a commercial building after hours but was apprehended before taking anything. The prosecution relied on circumstantial evidence to prove intent, including Thompson's possession of burglary tools, his lack of authorization to be in the building, and his attempt to flee upon detection. The court held that intent can be inferred from circumstantial evidence and the totality of circumstances. A defendant's conduct before, during, and after the entry may demonstrate the requisite intent. Here, the possession of tools commonly used for theft, combined with unauthorized entry during non-business hours and flight when discovered, provided sufficient evidence for a reasonable jury to infer Thompson intended to commit theft upon entry. The conviction was affirmed."
+  },
+  {
+    "case_name": "Miller v. National Health Insurance Co.",
+    "court": "United States Court of Appeals, Fifth Circuit",
+    "date": "2023-02-28",
+    "citation": "678 F.3d 901",
+    "topic": "contract law",
+    "content": "Miller sued National Health Insurance Co. for breach of contract after the company denied coverage for a medical procedure. The insurance policy contained an exclusion for experimental treatments. Miller argued the procedure was a recognized treatment, not experimental. The court applied contract interpretation principles, holding that insurance policies are contracts of adhesion and ambiguous terms must be construed against the drafter. Medical evidence showed the procedure had FDA approval and was performed at major medical centers, though some insurers classified it as experimental. The court found the term experimental ambiguous because the policy did not define it with reference to any objective standard such as FDA approval or medical consensus. Under the rule of contra proferentem, ambiguities in insurance contracts are resolved in favor of coverage. The court reversed the denial of coverage and held that National Health Insurance must pay for Miller's medical procedure."
+  },
+  {
+    "case_name": "Brown v. Jefferson County School District",
+    "court": "United States Court of Appeals, Sixth Circuit",
+    "date": "2023-06-05",
+    "citation": "789 F.3d 456",
+    "topic": "constitutional law",
+    "content": "Parents challenged a school district's policy requiring student athletes to submit to random drug testing, alleging it violated the Fourth Amendment's prohibition against unreasonable searches. The Supreme Court in Vernonia School District v. Acton established that schools may conduct drug testing of student athletes under certain circumstances. The court applied the special needs doctrine, which permits warrantless searches when the government has important interests beyond normal law enforcement. Student athletes have a reduced expectation of privacy due to the communal nature of locker rooms and physical examinations required for sports participation. The school district demonstrated a substantial interest in preventing drug use among students and ensuring athlete safety. The testing policy was reasonable in scope, involving only a urine sample and testing for standard illicit drugs. The court upheld the policy, finding it constitutional under the special needs exception to the Fourth Amendment."
+  },
+  {
+    "case_name": "Riverside Development LLC v. City Planning Commission",
+    "court": "Supreme Court of Illinois",
+    "date": "2022-08-23",
+    "citation": "456 N.E.3d 234",
+    "topic": "land use law",
+    "content": "Riverside Development challenged the City Planning Commission's denial of a variance to build a commercial structure that exceeded height restrictions in the zoning code. Under Illinois law, a variance may be granted when strict application of the zoning ordinance would cause practical difficulties or particular hardship. The applicant must show: (1) the property cannot yield a reasonable return if used only for purposes allowed in the zone, (2) the hardship is due to unique circumstances of the property, and (3) the variance will not alter the essential character of the locality. Riverside presented evidence that the lot's irregular shape and topography made it difficult to construct a commercially viable building within height limits. However, the court held that economic hardship alone is insufficient; the hardship must arise from the land itself, not the owner's business objectives. The court affirmed the denial, ruling that Riverside failed to demonstrate unique physical characteristics that prevented reasonable use of the property."
+  },
+  {
+    "case_name": "Wilson v. First National Bank",
+    "court": "United States District Court, Southern District of New York",
+    "date": "2023-05-30",
+    "citation": "890 F.Supp.3d 567",
+    "topic": "consumer protection",
+    "content": "Wilson sued First National Bank under the Fair Debt Collection Practices Act (FDCPA) for allegedly harassing collection calls. The FDCPA prohibits debt collectors from engaging in abusive, deceptive, or unfair practices. Wilson claimed the bank called him multiple times daily, including at his workplace, after he requested they cease contact. The court examined whether the bank's conduct violated the FDCPA. Evidence showed the bank called Wilson seven times in one day and continued calling his workplace after he informed them his employer prohibited personal calls. The court held that repeated calls to a debtor's workplace after being told such contact is prohibited constitutes harassment under the FDCPA. Additionally, the frequency and timing of calls can amount to oppressive conduct even if no single call is abusive. The court found the bank violated the FDCPA and awarded Wilson statutory damages, actual damages for emotional distress, and attorney's fees."
+  },
+  {
+    "case_name": "Garcia v. Department of Motor Vehicles",
+    "court": "Court of Appeal of California, Third Appellate District",
+    "date": "2022-11-29",
+    "citation": "345 Cal.App.5th 678",
+    "topic": "administrative law",
+    "content": "Garcia challenged the Department of Motor Vehicles' suspension of his driver's license following a DUI arrest. At the administrative hearing, Garcia argued the arresting officer lacked probable cause to stop his vehicle. The court reviewed the administrative decision under the substantial evidence standard, which requires deference to agency factual findings if supported by reasonable evidence. The officer testified he observed Garcia weaving between lanes and driving ten miles below the speed limit. These observations, combined with the late hour and location known for impaired driving, provided reasonable suspicion for the traffic stop. Once stopped, the officer detected alcohol odor and Garcia failed field sobriety tests, establishing probable cause for arrest. The court held that substantial evidence supported the DMV's findings and affirmed the license suspension. Administrative agencies are entitled to deference in their factual determinations, especially when based on witness credibility and expert judgment."
+  },
+  {
+    "case_name": "Taylor v. Mega Retail Corporation",
+    "court": "Supreme Court of Georgia",
+    "date": "2023-08-16",
+    "citation": "567 S.E.2d 890",
+    "topic": "tort law",
+    "content": "Customer Taylor slipped on a wet floor in Mega Retail Corporation's store and suffered injuries. Georgia law holds premises owners liable for injuries caused by hazardous conditions if the owner had superior knowledge of the hazard. Taylor alleged the store knew or should have known about the wet floor. The court applied the two-pronged test: (1) did the owner have actual or constructive knowledge of the hazard, and (2) did the plaintiff lack knowledge of the hazard despite exercising ordinary care. Evidence showed an employee mopped the floor 30 minutes before the accident but did not place warning signs. However, the water was clear and obvious in good lighting. The court held that Mega Retail had knowledge of the wet floor but Taylor also could have seen it by exercising ordinary care. Under Georgia's comparative negligence statute, the court apportioned fault 60% to Mega Retail and 40% to Taylor, reducing her damage award accordingly."
+  },
+  {
+    "case_name": "United States v. Chen",
+    "court": "United States Court of Appeals, Second Circuit",
+    "date": "2023-03-14",
+    "citation": "234 F.3d 345",
+    "topic": "criminal law",
+    "content": "Chen was convicted of wire fraud for operating a Ponzi scheme that defrauded investors of millions of dollars. On appeal, Chen argued the trial court improperly admitted evidence of lavish personal expenditures. The government sought to introduce evidence that Chen purchased luxury cars, jewelry, and real estate while telling investors their money was safely invested. The court held this evidence was admissible under Federal Rule of Evidence 404(b) to show intent and absence of mistake. While evidence of other acts is generally inadmissible to prove character or propensity, it may be admitted for other purposes such as proving motive, opportunity, intent, or knowledge. Here, Chen's personal expenditures were relevant to prove he intended to defraud investors rather than making honest investment mistakes. The probative value of this evidence outweighed any prejudicial effect, and the trial court properly instructed the jury on its limited purpose. The conviction was affirmed."
+  },
+  {
+    "case_name": "Horizon Airlines v. Federal Aviation Administration",
+    "court": "United States Court of Appeals, D.C. Circuit",
+    "date": "2022-12-19",
+    "citation": "456 F.3d 789",
+    "topic": "administrative law",
+    "content": "Horizon Airlines challenged an FAA order suspending its operating certificate for safety violations. The FAA found the airline failed to comply with mandatory maintenance schedules for multiple aircraft. The court reviewed the agency action under the Administrative Procedure Act's arbitrary and capricious standard. This deferential standard asks whether the agency examined relevant data and articulated a rational connection between facts and the decision. The FAA presented evidence that Horizon repeatedly missed maintenance deadlines, falsified inspection records, and continued operating aircraft with known mechanical issues. The court held the FAA's decision was neither arbitrary nor capricious. Ensuring aviation safety is within the FAA's core expertise, and the agency's interpretation of safety regulations deserves substantial deference. The severity of the violations justified the suspension, and the court found no procedural errors in the administrative proceedings. The suspension was upheld."
+  },
+  {
+    "case_name": "Robinson v. State Farm Insurance",
+    "court": "Supreme Court of Florida",
+    "date": "2023-07-25",
+    "citation": "678 So.3d 123",
+    "topic": "insurance law",
+    "content": "Robinson's home was damaged by a hurricane, and State Farm Insurance denied his claim, asserting the damage resulted from flooding, which was excluded from the policy. Robinson argued the damage was caused by wind-driven rain, which was covered. The court addressed the burden of proof in insurance disputes. The insured bears the initial burden of proving the loss falls within policy coverage. Once that burden is met, the insurer must prove any applicable exclusion applies. Robinson presented expert testimony that wind damaged the roof, allowing rain to enter the home. State Farm's expert testified the damage pattern indicated rising floodwaters. The court found Robinson met his burden of showing a covered wind event caused the damage. State Farm failed to prove the flooding exclusion applied because the evidence was inconclusive about the source of water. Under Florida law, when evidence of the cause of loss is ambiguous, courts construe the policy in favor of coverage. The court reversed the denial and ordered State Farm to pay the claim."
+  },
+  {
+    "case_name": "Mitchell v. Acme Construction Company",
+    "court": "Court of Appeals of Texas, Third District",
+    "date": "2022-10-11",
+    "citation": "234 S.W.3d 456",
+    "topic": "employment law",
+    "content": "Construction worker Mitchell sued Acme Construction for injuries sustained on the job, claiming the company violated OSHA safety regulations. Acme argued Mitchell's exclusive remedy was workers' compensation and the lawsuit should be dismissed. Texas law provides that workers' compensation is generally the exclusive remedy for workplace injuries, but an exception exists when the employer's conduct constitutes a gross negligence. Mitchell alleged Acme knowingly failed to provide fall protection despite repeated safety inspector warnings. The court examined whether this conduct rose to the level of gross negligence, which requires: (1) an act or omission viewed objectively involves extreme risk of harm, and (2) the actor had actual, subjective awareness of the risk but proceeded anyway. Evidence showed Acme received three citations for fall protection violations in six months and management emails discussed the cost of compliance versus potential fines. The court held this evidence supported a finding of gross negligence, allowing Mitchell's lawsuit to proceed outside the workers' compensation system."
+  },
+  {
+    "case_name": "Peterson v. United Healthcare Services",
+    "court": "United States Court of Appeals, Ninth Circuit",
+    "date": "2023-04-19",
+    "citation": "567 F.3d 678",
+    "topic": "ERISA law",
+    "content": "Peterson sued United Healthcare Services for denial of benefits under an employer-sponsored health plan governed by ERISA (Employee Retirement Income Security Act). The plan administrator denied coverage for a spinal surgery, deeming it not medically necessary. Under ERISA, courts review benefit denials under an abuse of discretion standard when the plan gives the administrator discretionary authority. The court must uphold the denial unless it was arbitrary and capricious. Peterson presented opinions from three treating physicians recommending surgery. United Healthcare relied on a peer review by a physician who never examined Peterson and reviewed only medical records. The court held the administrator abused its discretion by giving controlling weight to a non-examining reviewer while disregarding the consensus of treating physicians. ERISA requires administrators to provide meaningful review and explain reasons for denying claims. The cursory review and failure to adequately consider contrary medical evidence constituted an abuse of discretion. The court reversed the denial and ordered United Healthcare to provide coverage."
+  },
+  {
+    "case_name": "Jackson v. City of Chicago",
+    "court": "United States District Court, Northern District of Illinois",
+    "date": "2022-09-06",
+    "citation": "345 F.Supp.3d 234",
+    "topic": "civil rights",
+    "content": "Jackson sued the City of Chicago under 42 U.S.C. § 1983 for excessive force during an arrest. Jackson alleged police officers used a taser on him without justification while he was complying with commands. The court analyzed the claim under the Fourth Amendment's reasonableness standard established in Graham v. Connor. Objective reasonableness must be judged from the perspective of a reasonable officer on the scene, not with 20/20 hindsight. The court considers: (1) the severity of the crime, (2) whether the suspect poses an immediate threat, and (3) whether the suspect is actively resisting or attempting to evade arrest. Video evidence showed Jackson on the ground with hands visible when officers deployed the taser. The city argued officers feared Jackson would flee. The court found that a reasonable jury could conclude the use of a taser on a non-resisting suspect who posed no immediate threat was excessive. Viewing facts in the light most favorable to Jackson, the officers were not entitled to qualified immunity, and the case proceeded to trial."
+  },
+  {
+    "case_name": "Lee v. Amazon Web Services, Inc.",
+    "court": "United States District Court, Western District of Washington",
+    "date": "2023-06-22",
+    "citation": "678 F.Supp.3d 567",
+    "topic": "contract law",
+    "content": "Software developer Lee sued Amazon Web Services (AWS) for breach of contract after AWS terminated his account without notice, causing Lee to lose access to critical business data. The AWS terms of service included a clause allowing AWS to terminate accounts at any time for any reason. Lee argued this clause was unconscionable and unenforceable. The court applied Washington's unconscionability doctrine, which requires both procedural and substantive unconscionability. Procedural unconscionability involves unfair surprise or lack of meaningful choice. Substantive unconscionability involves terms unreasonably favorable to one party. The court found procedural unconscionability because the terms were buried in a lengthy agreement with no opportunity to negotiate. However, the court found insufficient substantive unconscionability because AWS had legitimate business reasons for reservation of termination rights. Additionally, Lee was a sophisticated business user who could have chosen alternative providers. The court held the termination clause enforceable, though it suggested AWS implement better notice procedures as a matter of good business practice."
+  },
+  {
+    "case_name": "Harris v. Department of Homeland Security",
+    "court": "United States Court of Appeals, Fourth Circuit",
+    "date": "2023-01-17",
+    "citation": "789 F.3d 234",
+    "topic": "immigration law",
+    "content": "Harris, a lawful permanent resident, challenged his removal order following a criminal conviction for drug possession. Under the Immigration and Nationality Act, certain criminal convictions make non-citizens deportable. Harris argued his conviction was for simple possession, which does not qualify as an aggravated felony warranting removal. The court applied the categorical approach to determine whether the conviction matched the federal definition of an aggravated felony. Under this approach, courts look only to the statutory elements of the crime of conviction, not the particular facts of the case. Harris's state conviction required proof of possession with intent to distribute, which corresponds to the federal drug trafficking definition. The court held that drug trafficking is categorically an aggravated felony under immigration law. Harris's conviction therefore rendered him deportable despite his lawful permanent resident status. The court affirmed the removal order but noted that Harris could seek discretionary relief from the Attorney General."
+  },
+  {
+    "case_name": "Collins v. Board of County Commissioners",
+    "court": "United States Court of Appeals, Tenth Circuit",
+    "date": "2022-11-14",
+    "citation": "890 F.3d 456",
+    "topic": "constitutional law",
+    "content": "Collins challenged a county ordinance prohibiting sleeping in vehicles overnight, alleging it violated the Eighth Amendment's prohibition on cruel and unusual punishment as applied to homeless individuals with no alternative shelter. The Ninth Circuit in Martin v. City of Boise held that punishing homeless individuals for sleeping in public when no shelter is available violates the Eighth Amendment. Following Martin, the court examined whether Collins had access to adequate shelter alternatives. Evidence showed the county had only 50 shelter beds for an estimated 300 homeless individuals, and the shelter excluded individuals with pets or those who had consumed alcohol. The court held that prosecuting homeless individuals for sleeping in vehicles when insufficient shelter exists constitutes cruel and unusual punishment. The Eighth Amendment prohibits criminalizing involuntary conduct that is an unavoidable consequence of being human. Sleeping is a biological necessity, and penalizing people for sleeping when they have nowhere else to go effectively punishes them for their status as homeless. The ordinance was unconstitutional as applied to Collins."
+  },
+  {
+    "case_name": "Williams v. General Motors Corporation",
+    "court": "United States District Court, Eastern District of Michigan",
+    "date": "2023-05-09",
+    "citation": "456 F.Supp.3d 789",
+    "topic": "product liability",
+    "content": "Williams sued General Motors after a vehicle defect caused a collision resulting in serious injuries. Williams alleged strict product liability, negligence, and breach of warranty. Under Michigan law, a products liability claim requires proof that: (1) the product was defective, (2) the defect existed when it left the manufacturer's control, and (3) the defect caused plaintiff's injuries. Williams presented expert testimony that a defect in the braking system caused brake failure. GM argued the brake failure resulted from Williams's failure to maintain the vehicle. The court found sufficient evidence to submit the case to a jury. Expert analysis of the brake assembly revealed a manufacturing defect in the hydraulic system that would not have been detectable through routine maintenance. Additionally, GM had received similar complaints from other vehicle owners, suggesting a systemic defect rather than isolated maintenance issues. The court denied GM's motion for summary judgment, holding that a reasonable jury could find the vehicle was defectively manufactured and the defect proximately caused Williams's injuries."
+  },
+  {
+    "case_name": "Baker v. National Labor Relations Board",
+    "court": "United States Court of Appeals, Seventh Circuit",
+    "date": "2022-12-27",
+    "citation": "567 F.3d 123",
+    "topic": "labor law",
+    "content": "The National Labor Relations Board found Baker's employer committed an unfair labor practice by terminating him for union organizing activities. The employer claimed Baker was fired for poor performance. The court reviewed the NLRB's decision under the substantial evidence standard. In cases alleging discriminatory discharge for union activity, the NLRB applies the Wright Line framework: (1) the General Counsel must prove union activity was a motivating factor in the discharge, and (2) if proven, the burden shifts to the employer to show it would have made the same decision absent the protected activity. Evidence showed Baker received satisfactory performance reviews until beginning union organizing, managers made anti-union statements, and Baker's termination occurred one week after distributing union literature. The employer failed to produce contemporaneous documentation of alleged performance problems. The court held substantial evidence supported the NLRB's finding that union animus motivated the discharge. The employer's proffered reasons were pretextual, and the NLRB properly ordered Baker's reinstatement with back pay."
+  },
+  {
+    "case_name": "Thompson v. Wells Fargo Bank",
+    "court": "Court of Appeal of California, Fourth Appellate District",
+    "date": "2023-02-14",
+    "citation": "678 Cal.App.5th 345",
+    "topic": "consumer protection",
+    "content": "Thompson sued Wells Fargo for fraudulent opening of accounts without his authorization. Thompson discovered the bank had opened multiple credit card and checking accounts in his name without his knowledge or consent. California's Unfair Competition Law (UCL) prohibits unlawful, unfair, or fraudulent business practices. The bank argued it had a contractual relationship with Thompson through his existing account and he had implicitly authorized additional accounts. The court rejected this argument, holding that express authorization is required to open new accounts in a customer's name. The bank's practice of opening unauthorized accounts to meet sales quotas constituted fraudulent conduct under the UCL. Thompson proved: (1) a misrepresentation or deceptive practice, (2) knowledge of falsity, (3) intent to induce reliance, (4) justifiable reliance, and (5) resulting damages. The unauthorized accounts harmed Thompson's credit score and caused financial losses. The court awarded compensatory damages, ordered the bank to remove accounts from Thompson's credit report, and imposed civil penalties for the UCL violation."
+  },
+  {
+    "case_name": "Morrison v. State of Nevada",
+    "court": "Supreme Court of Nevada",
+    "date": "2023-09-05",
+    "citation": "789 P.3d 456",
+    "topic": "criminal procedure",
+    "content": "Morrison challenged his conviction on grounds of ineffective assistance of counsel. Under Strickland v. Washington, a defendant must prove: (1) counsel's performance was deficient, falling below an objective standard of reasonableness, and (2) the deficient performance prejudiced the defense, creating a reasonable probability that but for counsel's errors, the result would have been different. Morrison's attorney failed to interview alibi witnesses, did not object to inadmissible hearsay evidence, and provided no opening statement. The state argued these were strategic decisions entitled to deference. The court held that while strategic choices deserve deference, complete failure to investigate and present a defense is not strategy but abandonment of professional responsibility. The alibi witnesses would have provided testimony directly contradicting the prosecution's timeline. Counsel's failure to interview them could not be justified as tactical. Combined with other errors, Morrison demonstrated both deficient performance and prejudice. The court reversed the conviction and remanded for a new trial with effective representation."
+  },
+  {
+    "case_name": "Reynolds v. Pfizer Pharmaceuticals",
+    "court": "United States Court of Appeals, Third Circuit",
+    "date": "2023-08-29",
+    "citation": "890 F.3d 678",
+    "topic": "product liability",
+    "content": "Reynolds sued Pfizer alleging a prescription medication caused serious side effects that were not adequately disclosed. Under Pennsylvania law, pharmaceutical manufacturers have a duty to warn of known or scientifically knowable risks associated with their products. The learned intermediary doctrine generally requires warnings to be given to prescribing physicians rather than directly to patients. Reynolds argued Pfizer knew of the risks but failed to adequately warn doctors. The court examined whether Pfizer's warning label was sufficient. Evidence showed clinical trials revealed the adverse effects in a small percentage of participants, but the label described the risk as rare without quantifying the percentage. Medical experts testified that physicians might have chosen alternative treatments if properly informed of the risk magnitude. The court held that warnings must be adequate to enable physicians to make informed decisions. A warning that obscures risk severity fails to fulfill the duty to warn. The court found sufficient evidence that Pfizer's warning was inadequate and that better disclosure would have altered prescribing decisions. The case proceeded to trial on causation and damages."
+  },
+  {
+    "case_name": "Parker v. University of Michigan",
+    "court": "United States District Court, Eastern District of Michigan",
+    "date": "2022-10-25",
+    "citation": "234 F.Supp.3d 890",
+    "topic": "education law",
+    "content": "Student Parker sued the University of Michigan for violating his due process rights during a sexual misconduct disciplinary proceeding. Parker was suspended for two years following an accusation of sexual assault. He alleged the university's procedures were fundamentally unfair. In university disciplinary proceedings, due process requires notice of the charges and an opportunity to be heard. The court examined whether the university's procedures met this standard. Parker received written notice of the allegations and was allowed to submit a written statement but was not permitted to cross-examine his accuser or present witnesses. The court held that while universities need not provide full trial-like procedures, cross-examination is particularly important in cases where credibility is the central issue. When the proceeding turns on disputed factual questions with serious consequences for the accused, due process requires some opportunity to test the accuser's credibility. The university's complete prohibition on cross-examination, even through a third party, violated Parker's due process rights. The court ordered the university to vacate the discipline and conduct a new hearing with adequate procedural protections."
+  },
+  {
+    "case_name": "Coleman v. Sprint Communications",
+    "court": "United States Court of Appeals, Eighth Circuit",
+    "date": "2023-07-03",
+    "citation": "345 F.3d 567",
+    "topic": "arbitration",
+    "content": "Coleman sued Sprint for deceptive billing practices, seeking to represent a class of similarly affected customers. Sprint moved to compel arbitration based on a clause in the service agreement that also waived class action rights. The Federal Arbitration Act requires courts to enforce arbitration agreements according to their terms. However, the National Labor Relations Board and some courts have found class action waivers in arbitration agreements violate employees' rights to engage in concerted activity. Coleman argued the class waiver was unconscionable and unenforceable. The court applied the Supreme Court's decision in AT&T Mobility v. Concepcion, which held that class action waivers in arbitration agreements are generally enforceable under the FAA. The court rejected Coleman's unconscionability argument, finding the arbitration clause was prominently disclosed and provided adequate remedies for individual claims. While Sprint agreed to pay arbitration fees and allow recovery of attorney's fees, making individual arbitration economically feasible. The court compelled arbitration and dismissed the class action, though it noted the continuing policy debate over whether such waivers adequately protect consumer rights."
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "Bash(cd:*)",
+      "Bash(source:*)",
+      "Bash(timeout 5 python:*)",
+      "Bash(timeout 3 python:*)",
+      "Bash(npx create-next-app:*)"
+    ]
+  },
+  "enabledPlugins": {
+    "llm-application-dev@claude-code-workflows": true,
+    "ui-design@claude-code-workflows": true
+  }
+}
