@@ -20,3 +20,6 @@ jobs:
       - run: pip install -r backend/requirements.txt
       - name: Verify imports
         run: python -c "from backend.main import app; print('Backend imports OK')"
+        env:
+          OPENAI_API_KEY: test-key
+          PINECONE_API_KEY: test-key
