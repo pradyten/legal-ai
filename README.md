@@ -1,330 +1,272 @@
 # Legal AI Research Assistant
 
-A production-grade RAG (Retrieval-Augmented Generation) powered legal research assistant that provides citation-grounded answers to questions about U.S. case law.
+A RAG-powered legal research assistant that answers questions about U.S. case law with citation-grounded responses, dual-layer confidence scoring, and a modern chat interface.
+
+**Built with:** FastAPI + LangGraph | Next.js 16 + TypeScript | Pinecone + OpenAI | Shadcn/ui + Tailwind CSS
+
+[LinkedIn](https://www.linkedin.com/in/p-tendulkar/) | [GitHub](https://github.com/pradyten/legal-ai)
+
+---
+
+## Screenshots
+
+### Chat Response with RAG Pipeline
+![Chat Response](docs/screenshots/chat-response.png)
+*AI-generated answer with typewriter effect, confidence badge, and citation count. The header includes export, clear chat, GitHub/LinkedIn links, and theme toggle.*
+
+### Source Drawer with Citations
+![Citations Drawer](docs/screenshots/citations-drawer.png)
+*Slide-out drawer showing confidence scoring, 4 cited cases with court details and excerpts, and 5 retrieved source chunks with match percentages.*
+
+---
 
 ## Features
 
-- 🔍 **Semantic Search**: Vector-based retrieval of relevant legal cases from Pinecone
-- 🎯 **Citation Grounding**: Every answer is backed by specific case citations
-- 📊 **Confidence Scoring**: Dual-layer confidence assessment (retrieval + LLM self-assessment)
-- 💬 **Conversation Memory**: Multi-turn conversations with context retention
-- 🔄 **LLM Fallback**: Automatic failover between OpenAI and Mistral providers
-- 🎨 **Modern UI**: Split-panel interface showing chat and source citations
+- **RAG Pipeline Visualization** — 5-step animated pipeline stepper (Rewrite → Retrieve → Assess → Generate → Score) shows the AI's reasoning process in real-time
+- **Dual Confidence Scoring** — combines retrieval quality (60%) with LLM self-assessment (40%); hover the badge for a detailed breakdown with progress bars
+- **Citation-Grounded Answers** — every response includes verifiable case citations with court, date, and expandable excerpts
+- **Typewriter Animation** — answers stream character-by-character for the latest message; respects `prefers-reduced-motion`
+- **Slide-Out Source Drawer** — click any assistant message to open an inline drawer with citations and retrieved chunks; chat area resizes naturally
+- **Dark/Light Theme** — system-aware theme toggle with smooth transitions
+- **Export Chat** — download conversation as TXT or JSON
+- **Copy Messages** — one-click copy for any message
+- **Example Questions** — clickable starter prompts on the empty state
+- **Error Handling** — error boundary, toast notifications, and graceful API failure recovery
 
 ## Architecture
 
 ```
-User Query → LangGraph Chain → Response
-  ├─ Query Rewriting (multi-turn context)
-  ├─ Pinecone Retrieval (top-5 semantic search)
-  ├─ Retrieval Confidence Assessment
-  ├─ LLM Generation (GPT-4o with citation grounding)
-  └─ LLM Self-Assessment
+┌─────────────────────────────────────────────────────┐
+│                    Frontend (Next.js 16)             │
+│  ┌──────────────────────┐  ┌──────────────────────┐ │
+│  │      Chat Area       │  │   Source Drawer       │ │
+│  │  - Message bubbles   │  │  - Confidence score   │ │
+│  │  - Typewriter effect │◄─│  - Citations          │ │
+│  │  - Pipeline stepper  │  │  - Retrieved chunks   │ │
+│  │  - Input bar         │  │  - Match percentages  │ │
+│  └──────────┬───────────┘  └──────────────────────┘ │
+└─────────────┼───────────────────────────────────────┘
+              │ POST /chat
+              ▼
+┌─────────────────────────────────────────────────────┐
+│              Backend (FastAPI + LangGraph)           │
+│                                                     │
+│  ┌─────────┐  ┌──────────┐  ┌────────┐  ┌────────┐│
+│  │Rewrite  │─▶│ Retrieve │─▶│ Assess │─▶│Generate││
+│  │Question │  │  (top-5) │  │Retrieval│  │ Answer ││
+│  └─────────┘  └──────────┘  └────────┘  └────────┘│
+│                                              │      │
+│                              ┌────────┐  ┌───▼────┐│
+│                              │Combine │◄─│  Self  ││
+│                              │& Score │  │ Assess ││
+│                              └────────┘  └────────┘│
+│                                                     │
+│  Pinecone (vectors) ◄──── text-embedding-3-small    │
+│  GPT-4o (primary)   ◄──── Mistral (fallback)       │
+└─────────────────────────────────────────────────────┘
 ```
+
+### RAG Pipeline (6 Nodes)
+
+| Node | Purpose |
+|------|---------|
+| **Rewrite Question** | Reformulates follow-up questions as standalone queries using conversation context |
+| **Retrieve Documents** | Pinecone vector search — top-5 chunks using `text-embedding-3-small` (1536d) |
+| **Assess Retrieval** | Evaluates retrieval quality from similarity scores |
+| **Generate Answer** | GPT-4o generates citation-grounded answer (Mistral fallback) |
+| **Self-Assess LLM** | LLM evaluates its own answer confidence |
+| **Combine & Score** | Weighted confidence: 60% retrieval + 40% LLM self-assessment |
+
+### Confidence Levels
+
+| Level | Score | Color |
+|-------|-------|-------|
+| High | >= 0.75 | Green |
+| Medium | >= 0.50 | Amber |
+| Low | >= 0.25 | Red |
+| Insufficient | < 0.25 | Gray |
 
 ## Tech Stack
 
 ### Backend
-- **Framework**: FastAPI
-- **RAG Orchestration**: LangGraph + LangChain
-- **Vector Database**: Pinecone
-- **LLMs**: OpenAI GPT-4o (primary), Mistral (fallback)
-- **Embeddings**: OpenAI text-embedding-3-small
-- **Python**: 3.13
+- **FastAPI** — async Python web framework
+- **LangGraph** — composable multi-step RAG workflow
+- **OpenAI GPT-4o** — primary LLM with Mistral fallback
+- **Pinecone** — vector database (free tier, ~150 vectors)
+- **text-embedding-3-small** — 1536-dimension embeddings
 
 ### Frontend
-- **Framework**: Next.js 16 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **State Management**: React Hooks
+- **Next.js 16** — App Router with TypeScript strict mode
+- **Shadcn/ui** — Radix UI primitives (Dialog, Popover, DropdownMenu, ScrollArea)
+- **Tailwind CSS v3** — HSL CSS variables for light/dark theming
+- **Lucide React** — icon library
+- **Sonner** — toast notifications
+
+## Getting Started
+
+### Prerequisites
+- Python 3.11+
+- Node.js 18+
+- OpenAI API key
+- Pinecone API key (free tier)
+- Optional: Mistral API key (for LLM fallback)
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/pradyten/legal-ai.git
+cd legal-ai
+```
+
+### 2. Backend setup
+```bash
+# Create and activate virtual environment
+python -m venv venv
+source venv/Scripts/activate   # Windows Git Bash
+# source venv/bin/activate     # macOS/Linux
+
+# Install dependencies
+pip install -r backend/requirements.txt
+
+# Configure environment
+cp backend/.env.example backend/.env
+# Edit backend/.env with your API keys:
+#   OPENAI_API_KEY=sk-...
+#   PINECONE_API_KEY=...
+
+# Ingest mock case data into Pinecone (~150 vectors from 30 cases)
+python -m backend.ingestion.ingest
+
+# Start backend server
+python -m uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### 3. Frontend setup
+```bash
+cd frontend
+npm install
+
+# Configure API URL (optional, defaults to http://localhost:8000)
+echo "NEXT_PUBLIC_API_URL=http://localhost:8000" > .env.local
+
+npm run dev
+```
+
+### 4. Quick Start (Windows)
+```bash
+./start-dev.bat
+# or
+./start-dev.ps1
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
 ```
 legal-ai/
 ├── backend/
-│   ├── ingestion/          # Data loading pipeline
-│   │   ├── mock_data.json  # 30 synthetic legal cases
-│   │   ├── chunker.py      # Text splitting logic
-│   │   └── ingest.py       # Pinecone upload script
-│   ├── services/           # Core business logic
-│   │   ├── llm_provider.py # Abstract LLM interface
-│   │   ├── retriever.py    # Pinecone wrapper
-│   │   ├── confidence.py   # Confidence scoring
-│   │   └── rag_pipeline.py # LangGraph chain ⭐
-│   ├── routes/             # API endpoints
-│   │   ├── health.py       # Health check
-│   │   └── chat.py         # Main chat endpoint ⭐
-│   ├── prompts/
-│   │   └── system_prompt.txt # LLM instructions
-│   ├── config.py           # Environment configuration
-│   └── main.py             # FastAPI app
+│   ├── main.py                 # FastAPI app entry point
+│   ├── config.py               # Pydantic Settings (env vars)
+│   ├── routes/
+│   │   └── chat.py             # POST /chat endpoint
+│   ├── services/
+│   │   ├── rag_pipeline.py     # 6-node LangGraph pipeline
+│   │   ├── llm_provider.py     # OpenAI/Mistral LLM abstraction
+│   │   ├── retriever.py        # Pinecone vector search
+│   │   └── confidence.py       # Dual-layer confidence scoring
+│   └── ingestion/
+│       ├── ingest.py           # Data loading pipeline
+│       └── data/               # 30 synthetic legal cases
 ├── frontend/
 │   ├── app/
-│   │   ├── page.tsx        # Main page ⭐
-│   │   ├── layout.tsx      # Root layout
-│   │   └── globals.css     # Global styles
-│   ├── components/         # React components
-│   │   ├── ChatPanel.tsx   # Chat interface ⭐
-│   │   ├── MessageBubble.tsx
-│   │   ├── SourceViewer.tsx
-│   │   ├── CitationCard.tsx
-│   │   └── ConfidenceBadge.tsx
+│   │   ├── page.tsx            # Main page (state management)
+│   │   ├── layout.tsx          # Root layout + providers
+│   │   └── globals.css         # Theme tokens + animations
+│   ├── components/
+│   │   ├── ChatArea.tsx        # Chat interface
+│   │   ├── Header.tsx          # App header with actions
+│   │   ├── MessageBubble.tsx   # Message cards + typewriter
+│   │   ├── SourceDrawer.tsx    # Slide-out citation drawer
+│   │   ├── PipelineStepper.tsx # RAG pipeline animation
+│   │   ├── ConfidenceBadge.tsx # Score badge + popover
+│   │   ├── EmptyState.tsx      # Hero + example questions
+│   │   ├── CitationCard.tsx    # Expandable citation card
+│   │   └── ui/                 # Shadcn/ui primitives
+│   ├── hooks/
+│   │   └── useTypewriter.ts    # Typewriter animation hook
 │   ├── lib/
-│   │   └── api.ts          # API client
+│   │   ├── api.ts              # API client
+│   │   ├── constants.ts        # App constants
+│   │   └── utils.ts            # Utility functions
 │   └── types/
-│       └── index.ts        # TypeScript interfaces
-└── README.md
+│       └── index.ts            # TypeScript interfaces
+├── docs/screenshots/           # README screenshots
+├── start-dev.bat               # Windows quick start
+└── start-dev.ps1               # PowerShell quick start
 ```
 
-## Setup Instructions
+## API
 
-### Prerequisites
+### `POST /chat`
 
-- Python 3.11+
-- Node.js 18+
-- OpenAI API key
-- Pinecone account (free tier)
-- Optional: Mistral API key (for fallback)
-
-### 1. Backend Setup
-
-```bash
-# Navigate to project root
-cd legal-ai
-
-# Create and activate virtual environment
-python -m venv venv
-source venv/Scripts/activate  # Windows Git Bash
-# or
-source venv/bin/activate      # Linux/Mac
-
-# Install dependencies
-pip install -r backend/requirements.txt
-
-# Configure environment variables
-cp backend/.env.example backend/.env
-# Edit backend/.env with your API keys:
-#   OPENAI_API_KEY=sk-...
-#   PINECONE_API_KEY=...
-#   PINECONE_INDEX_NAME=legal-ai-index
-```
-
-### 2. Ingest Data into Pinecone
-
-```bash
-# Run the ingestion pipeline (creates ~150 vectors from 30 cases)
-python -m backend.ingestion.ingest
-```
-
-Expected output:
-```
-Created index: legal-ai-index
-Loaded 30 documents
-Created 150 chunks
-Generated 150 embeddings
-Upserted 150 vectors
-Total vectors in index: 150
-```
-
-### 3. Frontend Setup
-
-```bash
-cd frontend
-
-# Install dependencies
-npm install
-
-# Configure environment
-cp .env.example .env.local
-# Edit .env.local if backend is not on localhost:8000
-```
-
-### 4. Run the Application
-
-**Terminal 1 - Backend:**
-```bash
-cd legal-ai
-source venv/Scripts/activate
-python -m uvicorn backend.main:app --reload --port 8000
-```
-
-**Terminal 2 - Frontend:**
-```bash
-cd frontend
-npm run dev
-```
-
-**Access:** http://localhost:3000
-
-## API Documentation
-
-### POST /chat
-
-Request:
+**Request:**
 ```json
 {
-  "session_id": "uuid-string",
-  "message": "What is contract consideration?",
+  "session_id": "uuid",
+  "message": "What is qualified immunity?",
   "conversation_history": [
-    {"role": "user", "content": "previous question"},
-    {"role": "assistant", "content": "previous answer"}
+    { "role": "user", "content": "..." },
+    { "role": "assistant", "content": "..." }
   ]
 }
 ```
 
-Response:
+**Response:**
 ```json
 {
-  "answer": "Contract consideration requires...",
-  "confidence": "high",
-  "confidence_score": 0.85,
+  "answer": "Qualified immunity is...",
   "citations": [
     {
-      "case_name": "Smith v. Jones Manufacturing Co.",
-      "court": "Supreme Court of California",
-      "date": "2023-05-15",
-      "citation": "123 Cal.4th 456",
-      "url": "https://www.courtlistener.com/?q=...",
-      "excerpt": "Under California contract law..."
+      "case_name": "Smith v. City of Example",
+      "citation": "123 F.3d 456",
+      "court": "United States Court of Appeals, Ninth Circuit",
+      "date": "2023-01-15",
+      "relevant_text": "..."
     }
   ],
-  "retrieved_chunks": [...],
-  "disclaimer": "This information is for educational purposes only..."
+  "confidence": "high",
+  "confidence_score": 0.82,
+  "retrieval_confidence": 0.85,
+  "llm_confidence": 0.78,
+  "retrieved_chunks": [...]
 }
 ```
 
-Interactive docs: http://localhost:8000/docs
+Interactive API docs available at `http://localhost:8000/docs`.
 
 ## Sample Queries
 
-Try these questions to test the system:
-
 1. **Contract Law**: "What is contract consideration?"
 2. **Constitutional Law**: "Explain the Fourth Amendment exclusionary rule"
-3. **Tort Law**: "What is premises liability?"
-4. **Employment Law**: "What is wrongful termination discrimination?"
+3. **Civil Rights**: "What is qualified immunity for police officers?"
+4. **Legal Doctrine**: "How does the doctrine of stare decisis work?"
 5. **Follow-up**: Ask "Can you give me another example?" after any answer
-
-## Configuration
-
-### Confidence Thresholds
-
-Edit `backend/.env`:
-```bash
-RETRIEVAL_CONFIDENCE_WEIGHT=0.6  # Weight for vector similarity score
-LLM_CONFIDENCE_WEIGHT=0.4        # Weight for LLM self-assessment
-HIGH_CONFIDENCE_THRESHOLD=0.75   # Threshold for "high" confidence
-MEDIUM_CONFIDENCE_THRESHOLD=0.50 # Threshold for "medium" confidence
-```
-
-### RAG Parameters
-
-```bash
-TOP_K_CHUNKS=5        # Number of documents to retrieve
-CHUNK_SIZE=512        # Token size per chunk
-CHUNK_OVERLAP=50      # Overlapping tokens between chunks
-```
-
-## Development
-
-### Adding Real Data
-
-Replace mock data with CourtListener dataset:
-
-1. Download bulk data from https://www.courtlistener.com/api/bulk-data/
-2. Update `backend/ingestion/ingest.py` to parse CourtListener format
-3. Re-run ingestion: `python -m backend.ingestion.ingest`
-
-### Testing
-
-```bash
-# Backend API test
-curl -X POST http://localhost:8000/chat \
-  -H "Content-Type: application/json" \
-  -d '{
-    "session_id": "test-123",
-    "message": "What is negligence?"
-  }'
-
-# Health check
-curl http://localhost:8000/health
-```
-
-### Deployment
-
-**Backend (Railway/Render):**
-1. Connect GitHub repo
-2. Set environment variables
-3. Deploy from `main` branch
-
-**Frontend (Vercel):**
-1. Connect GitHub repo
-2. Set `NEXT_PUBLIC_API_URL` to backend URL
-3. Auto-deploy from `main` branch
 
 ## Cost Estimates
 
-- **Pinecone**: Free (up to 100K vectors, we use ~150)
-- **OpenAI Embeddings**: ~$0.02 per full ingestion (150 chunks × $0.0001/1K tokens)
-- **OpenAI GPT-4o**: ~$0.015 per query (5K input + 1K output tokens)
-- **Monthly (100 queries)**: ~$1.50
-
-## Troubleshooting
-
-### "Validation Error: Field required"
-- Check `backend/.env` exists and contains all required keys
-- Verify the .env file is in the `backend/` directory
-
-### "Pinecone connection failed"
-- Verify PINECONE_API_KEY is correct
-- Check PINECONE_ENVIRONMENT matches your Pinecone region
-- Ensure index was created via ingestion script
-
-### Frontend can't connect to backend
-- Check CORS settings in `backend/main.py`
-- Verify `NEXT_PUBLIC_API_URL` in `frontend/.env.local`
-- Ensure backend is running on the correct port
-
-### "No vectors in index"
-- Run the ingestion script: `python -m backend.ingestion.ingest`
-- Check Pinecone dashboard to verify vectors were uploaded
-
-## Features Roadmap
-
-- [ ] User authentication and session persistence
-- [ ] Export chat history to PDF
-- [ ] Advanced filtering (by court, date range, topic)
-- [ ] Real-time streaming responses
-- [ ] Semantic caching for common queries
-- [ ] Integration with CourtListener API for real-time case updates
-- [ ] Multi-language support
-- [ ] Voice input/output
+| Resource | Cost |
+|----------|------|
+| Pinecone | Free (up to 100K vectors, we use ~150) |
+| OpenAI Embeddings | ~$0.02 per full ingestion |
+| OpenAI GPT-4o | ~$0.015 per query |
+| **Monthly (100 queries)** | **~$1.50** |
 
 ## License
 
-MIT License - see LICENSE file for details
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## Acknowledgments
-
-- Mock legal data synthesized for demonstration purposes
-- Built with LangChain/LangGraph framework
-- Powered by OpenAI and Pinecone
-
-## Support
-
-For issues or questions:
-- GitHub Issues: https://github.com/yourusername/legal-ai/issues
-- Email: your.email@example.com
+This project is for educational and portfolio purposes.
 
 ---
 
 **Disclaimer**: This tool is for educational and research purposes only. It does not constitute legal advice. Always consult a licensed attorney for legal matters.
+
+Built by [Pradyumn Tendulkar](https://www.linkedin.com/in/p-tendulkar/)

@@ -2,42 +2,22 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Scale, Sparkles, FileText } from 'lucide-react';
-import { useTheme } from 'next-themes';
 import { Message, ChatRequest } from '@/types';
 import { sendMessage } from '@/lib/api';
-import ChatPanel from '@/components/ChatPanel';
-import SourceViewer from '@/components/SourceViewer';
-import CitationCard from '@/components/CitationCard';
-import { ThemeToggle } from '@/components/theme-toggle';
-import { KeyboardShortcutsDialog } from '@/components/KeyboardShortcutsDialog';
-import { ExportChatDialog } from '@/components/ExportChatDialog';
-import { ClearChatDialog } from '@/components/ClearChatDialog';
+import Header from '@/components/Header';
+import ChatArea from '@/components/ChatArea';
+import SourceDrawer from '@/components/SourceDrawer';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
-import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 
 export default function Home() {
   const [sessionId, setSessionId] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
-  const [showShortcuts, setShowShortcuts] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const latestAssistantIdRef = useRef<string | null>(null);
 
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { setTheme, theme } = useTheme();
-
-  // Keyboard shortcuts
-  useKeyboardShortcuts({
-    onFocusInput: () => inputRef.current?.focus(),
-    onToggleTheme: () => setTheme(theme === 'dark' ? 'light' : 'dark'),
-    onShowHelp: () => setShowShortcuts(true),
-    onEscape: () => setShowShortcuts(false),
-  });
-
-  // Initialize session ID on mount
   useEffect(() => {
     setSessionId(uuidv4());
   }, []);
@@ -45,13 +25,14 @@ export default function Home() {
   const handleClearChat = () => {
     setMessages([]);
     setSelectedMessage(null);
-    setSessionId(uuidv4()); // Generate new session ID
+    setDrawerOpen(false);
+    setSessionId(uuidv4());
+    latestAssistantIdRef.current = null;
   };
 
   const handleSendMessage = async (content: string) => {
     if (!sessionId) return;
 
-    // Add user message
     const userMessage: Message = {
       id: uuidv4(),
       role: 'user',
@@ -63,7 +44,6 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      // Prepare conversation history
       const conversationHistory = messages.map((msg) => ({
         role: msg.role,
         content: msg.content,
@@ -75,27 +55,29 @@ export default function Home() {
         conversation_history: conversationHistory,
       };
 
-      // Send to API
       const response = await sendMessage(request);
 
-      // Add assistant message
+      const assistantId = uuidv4();
+      latestAssistantIdRef.current = assistantId;
+
       const assistantMessage: Message = {
-        id: uuidv4(),
+        id: assistantId,
         role: 'assistant',
         content: response.answer,
         citations: response.citations,
         confidence: response.confidence,
+        confidence_score: response.confidence_score,
+        retrieval_confidence: response.retrieval_confidence,
+        llm_confidence: response.llm_confidence,
+        chunks_count: response.retrieved_chunks?.length ?? 0,
         retrieved_chunks: response.retrieved_chunks,
         timestamp: new Date(),
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
-      setSelectedMessage(assistantMessage); // Auto-select to show sources
 
       if (response.error) {
-        toast.error('API Error', {
-          description: response.error,
-        });
+        toast.error('API Error', { description: response.error });
       }
     } catch (err) {
       const errorMessage: Message = {
@@ -107,100 +89,47 @@ export default function Home() {
       setMessages((prev) => [...prev, errorMessage]);
 
       toast.error('Connection Error', {
-        description: err instanceof Error ? err.message : 'Unknown error occurred. Please check your connection.',
+        description: err instanceof Error ? err.message : 'Unknown error occurred.',
       });
     } finally {
       setIsLoading(false);
     }
   };
 
+  const handleSelectMessage = (message: Message) => {
+    if (selectedMessage?.id === message.id && drawerOpen) {
+      // Toggle drawer closed if clicking same message
+      setDrawerOpen(false);
+      setSelectedMessage(null);
+    } else {
+      // Open/swap drawer content
+      setSelectedMessage(message);
+      setDrawerOpen(true);
+    }
+  };
+
   return (
     <ErrorBoundary>
-      <div className="h-screen flex flex-col bg-background">
-        {/* Header */}
-        <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="flex h-16 items-center px-6 justify-between">
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center shadow-sm">
-                <Scale className="h-5 w-5 text-white" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-foreground flex items-center gap-2">
-                  Legal AI Research Assistant
-                  <Sparkles className="h-4 w-4 text-primary animate-pulse" />
-                </h1>
-                <p className="text-xs text-muted-foreground">
-                  Citation-grounded answers from U.S. case law
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <ExportChatDialog messages={messages} />
-              <ClearChatDialog onClearChat={handleClearChat} messageCount={messages.length} />
-              <div className="h-6 w-px bg-border mx-2" />
-              <ThemeToggle />
-            </div>
-          </div>
-        </header>
-
-      {/* Main Content */}
-      <div className="flex-1 flex overflow-hidden">
-        {/* Chat Panel - 60% */}
-        <div className="w-3/5 border-r border-border flex flex-col">
-          <ChatPanel
+      <div className="h-screen h-[100dvh] w-full max-w-full flex flex-col bg-background overflow-hidden">
+        <Header messages={messages} onClearChat={handleClearChat} />
+        <div className="flex-1 flex min-h-0 min-w-0 overflow-hidden">
+          <ChatArea
             messages={messages}
             isLoading={isLoading}
             onSendMessage={handleSendMessage}
-            onSelectMessage={setSelectedMessage}
-            inputRef={inputRef}
+            onSelectMessage={handleSelectMessage}
+            selectedMessageId={selectedMessage?.id}
+            latestAssistantId={latestAssistantIdRef.current ?? undefined}
+          />
+          <SourceDrawer
+            message={selectedMessage}
+            isOpen={drawerOpen}
+            onClose={() => {
+              setDrawerOpen(false);
+              setSelectedMessage(null);
+            }}
           />
         </div>
-
-        {/* Source Viewer - 40% */}
-        <div className="w-2/5 bg-muted/30 flex flex-col overflow-hidden">
-          {selectedMessage && selectedMessage.citations && selectedMessage.citations.length > 0 ? (
-            <div className="h-full flex flex-col overflow-hidden">
-              {/* Citations Section */}
-              <div className="sticky top-0 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-10 border-b border-border px-6 py-4">
-                <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-primary" />
-                  Citations
-                  <span className="ml-auto text-sm font-normal text-muted-foreground">
-                    {selectedMessage.citations.length}
-                  </span>
-                </h3>
-              </div>
-
-              <ScrollArea className="flex-1">
-                <div className="space-y-4 p-6">
-                  {selectedMessage.citations.map((citation, idx) => (
-                    <CitationCard key={idx} citation={citation} index={idx} />
-                  ))}
-                </div>
-
-                {selectedMessage.retrieved_chunks && selectedMessage.retrieved_chunks.length > 0 && (
-                  <>
-                    <Separator className="my-4" />
-                    <div className="px-6 pb-6">
-                      <h3 className="text-base font-semibold mb-4 text-foreground">
-                        Retrieved Sources ({selectedMessage.retrieved_chunks.length})
-                      </h3>
-                      <SourceViewer chunks={selectedMessage.retrieved_chunks} />
-                    </div>
-                  </>
-                )}
-              </ScrollArea>
-            </div>
-          ) : selectedMessage && selectedMessage.retrieved_chunks ? (
-            <SourceViewer chunks={selectedMessage.retrieved_chunks} />
-          ) : (
-            <SourceViewer chunks={[]} />
-          )}
-        </div>
-      </div>
-
-        {/* Keyboard Shortcuts Dialog */}
-        <KeyboardShortcutsDialog open={showShortcuts} onOpenChange={setShowShortcuts} />
       </div>
     </ErrorBoundary>
   );

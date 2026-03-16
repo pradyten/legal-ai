@@ -1,3 +1,9 @@
+# Tool artifacts
+.playwright-mcp/
+.ui-design/
+*.png
+!docs/screenshots/*.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
