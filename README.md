@@ -4,7 +4,7 @@ A RAG-powered legal research assistant that answers questions about U.S. case la
 
 **Built with:** FastAPI + LangGraph | Next.js 16 + TypeScript | Pinecone + OpenAI | Shadcn/ui + Tailwind CSS
 
-[Live Demo](https://legal-ai.vercel.app) | [LinkedIn](https://www.linkedin.com/in/p-tendulkar/) | [GitHub](https://github.com/pradyten/legal-ai)
+[Live Demo](https://legal-ai-hazel-xi.vercel.app) | [LinkedIn](https://www.linkedin.com/in/p-tendulkar/) | [GitHub](https://github.com/pradyten/legal-ai)
 
 ---
 
