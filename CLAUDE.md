@@ -110,3 +110,11 @@ Backend requires `OPENAI_API_KEY` and `PINECONE_API_KEY`. Optional: `MISTRAL_API
 - **LLM fallback** — if OpenAI fails, automatically tries Mistral
 - **LangGraph over LangChain chains** — composable, debuggable workflow nodes for multi-step RAG
 - **Pinecone free tier** — 100K vector limit; current dataset uses ~150 vectors
+
+## Deployment
+
+- **Frontend:** Vercel (auto-deploys from `main`) — configured via `vercel.json`
+- **Backend:** Railway (auto-deploys from `main`) — configured via `railway.json` + `Procfile`
+- **CI:** GitHub Actions in `.github/workflows/` — `frontend-ci.yml` (lint + build) and `backend-ci.yml` (import check)
+- CORS accepts comma-separated origins in `FRONTEND_URL` env var for production
+- `frontend/next.config.ts` uses `output: 'standalone'` for optimized Vercel deployment

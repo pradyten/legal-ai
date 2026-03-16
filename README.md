@@ -4,7 +4,7 @@ A RAG-powered legal research assistant that answers questions about U.S. case la
 
 **Built with:** FastAPI + LangGraph | Next.js 16 + TypeScript | Pinecone + OpenAI | Shadcn/ui + Tailwind CSS
 
-[LinkedIn](https://www.linkedin.com/in/p-tendulkar/) | [GitHub](https://github.com/pradyten/legal-ai)
+[Live Demo](https://legal-ai.vercel.app) | [LinkedIn](https://www.linkedin.com/in/p-tendulkar/) | [GitHub](https://github.com/pradyten/legal-ai)
 
 ---
 
@@ -251,6 +251,32 @@ Interactive API docs available at `http://localhost:8000/docs`.
 3. **Civil Rights**: "What is qualified immunity for police officers?"
 4. **Legal Doctrine**: "How does the doctrine of stare decisis work?"
 5. **Follow-up**: Ask "Can you give me another example?" after any answer
+
+## Deployment
+
+The app is deployed with **Vercel** (frontend) and **Railway** (backend).
+
+```
+Vercel (Next.js)  ──POST /chat──►  Railway (FastAPI + LangGraph)
+                                    ├── Pinecone (vectors)
+                                    └── OpenAI (LLM + embeddings)
+```
+
+### Deploy Your Own
+
+**Backend (Railway):**
+1. Go to [railway.com](https://railway.com) → New Project → Deploy from GitHub Repo
+2. Set environment variables: `OPENAI_API_KEY`, `PINECONE_API_KEY`, `PINECONE_INDEX_NAME`, `FRONTEND_URL`
+3. Railway auto-detects Python and uses `railway.json` for the start command
+4. Note your Railway URL for the frontend config
+
+**Frontend (Vercel):**
+1. Go to [vercel.com](https://vercel.com) → Import Git Repository
+2. Set Root Directory to `frontend` (or rely on `vercel.json`)
+3. Set environment variable: `NEXT_PUBLIC_API_URL` = your Railway backend URL
+4. Deploy
+
+Both platforms auto-deploy on push to `main` via GitHub integration.
 
 ## Cost Estimates
 
