@@ -56,6 +56,8 @@ class ChatResponse(BaseModel):
     answer: str = Field(..., description="Assistant's answer to the question")
     confidence: str = Field(..., description="Confidence level: high/medium/low/insufficient")
     confidence_score: float = Field(..., description="Numerical confidence score (0-1)")
+    retrieval_confidence: float = Field(0.0, description="Retrieval quality confidence (0-1)")
+    llm_confidence: float = Field(0.0, description="LLM self-assessment confidence (0-1)")
     citations: List[Citation] = Field(..., description="Legal case citations referenced")
     retrieved_chunks: List[RetrievedChunk] = Field(..., description="Documents retrieved for context")
     disclaimer: str = Field(..., description="Legal disclaimer")
@@ -127,6 +129,8 @@ async def chat(request: ChatRequest) -> ChatResponse:
             answer=result["answer"],
             confidence=result["confidence"],
             confidence_score=result["confidence_score"],
+            retrieval_confidence=result.get("retrieval_confidence", 0.0),
+            llm_confidence=result.get("llm_confidence", 0.0),
             citations=[Citation(**citation) for citation in result["citations"]],
             retrieved_chunks=[
                 RetrievedChunk(text=chunk["text"], metadata=chunk["metadata"])

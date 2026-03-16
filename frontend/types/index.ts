@@ -22,6 +22,8 @@ export interface ChatResponse {
   answer: string;
   confidence: 'high' | 'medium' | 'low' | 'insufficient';
   confidence_score: number;
+  retrieval_confidence: number;
+  llm_confidence: number;
   citations: Citation[];
   retrieved_chunks: RetrievedChunk[];
   disclaimer: string;
@@ -39,6 +41,10 @@ export interface Message {
   content: string;
   citations?: Citation[];
   confidence?: string;
+  confidence_score?: number;
+  retrieval_confidence?: number;
+  llm_confidence?: number;
+  chunks_count?: number;
   retrieved_chunks?: RetrievedChunk[];
   timestamp: Date;
 }
