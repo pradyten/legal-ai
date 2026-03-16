@@ -113,8 +113,8 @@ Backend requires `OPENAI_API_KEY` and `PINECONE_API_KEY`. Optional: `MISTRAL_API
 
 ## Deployment
 
-- **Frontend:** Vercel (auto-deploys from `main`) — configured via `vercel.json`
+- **Frontend:** Vercel (auto-deploys from `main`) — Root Directory set to `frontend` in Vercel dashboard, `frontend/vercel.json` forces Next.js detection
 - **Backend:** Railway (auto-deploys from `main`) — configured via `railway.json` + `Procfile`
-- **CI:** GitHub Actions in `.github/workflows/` — `frontend-ci.yml` (lint + build) and `backend-ci.yml` (import check)
+- **CI:** GitHub Actions in `.github/workflows/` — `frontend-ci.yml` (build check) and `backend-ci.yml` (import check)
 - CORS accepts comma-separated origins in `FRONTEND_URL` env var for production
-- `frontend/next.config.ts` uses `output: 'standalone'` for optimized Vercel deployment
+- **Live:** https://legal-ai-hazel-xi.vercel.app (frontend) + https://legal-ai.up.railway.app (backend)

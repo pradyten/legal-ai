@@ -272,9 +272,10 @@ Vercel (Next.js)  ──POST /chat──►  Railway (FastAPI + LangGraph)
 
 **Frontend (Vercel):**
 1. Go to [vercel.com](https://vercel.com) → Import Git Repository
-2. Set Root Directory to `frontend` (or rely on `vercel.json`)
-3. Set environment variable: `NEXT_PUBLIC_API_URL` = your Railway backend URL
-4. Deploy
+2. Set Root Directory to `frontend`
+3. Leave Install Command, Build Command, and Output Directory as defaults
+4. Set environment variable: `NEXT_PUBLIC_API_URL` = your Railway backend URL
+5. Deploy
 
 Both platforms auto-deploy on push to `main` via GitHub integration.
 
